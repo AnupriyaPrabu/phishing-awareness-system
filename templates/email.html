@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Account Notification</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f1f3f4;
+        }
+
+        .email-wrapper {
+            width: 600px;
+            margin: 40px auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0px 2px 10px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .email-header {
+            background: #1a73e8;
+            color: white;
+            padding: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .email-meta {
+            padding: 15px;
+            background: #f8f9fa;
+            border-bottom: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        .email-meta p {
+            margin: 5px 0;
+        }
+
+        .email-body {
+            padding: 20px;
+            color: #202124;
+        }
+
+        .email-body h2 {
+            margin-top: 0;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 20px;
+            background: #1a73e8;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .footer {
+            padding: 15px;
+            font-size: 12px;
+            color: #5f6368;
+            background: #f8f9fa;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="email-wrapper">
+
+    <!-- Header -->
+    <div class="email-header">
+        Account Security Notification
+    </div>
+
+    <!-- Email details -->
+    <div class="email-meta">
+        <p><strong>From:</strong> security@system-alert.com</p>
+        <p><strong>To:</strong> user@gmail.com</p>
+        <p><strong>Subject:</strong> Account Activity Alert</p>
+    </div>
+
+    <!-- Email content -->
+    <div class="email-body">
+
+        <h2>⚠ Suspicious Login Attempt</h2>
+
+        <p>We detected a recent login attempt from a new device.</p>
+
+        <p><strong>Location:</strong> Chennai, India</p>
+        <p><strong>Device:</strong> Chrome on Windows</p>
+        <p><strong>Time:</strong> Just now</p>
+
+        <p>If this was you, no further action is required.</p>
+
+        <p>If this was not you, please review your account activity immediately.</p>
+
+        <!-- Button -->
+        <a href="/login" class="button">Review Activity</a>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        ⚠ This is a simulated security email for awareness purposes.<br>
+        © 2026 Security Awareness System
+    </div>
+
+</div>
+
+</body>
+</html>

